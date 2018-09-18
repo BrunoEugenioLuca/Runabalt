@@ -1,6 +1,7 @@
 package core;
 
 import java.awt.Rectangle;
+import java.util.LinkedList;
 
 import utils.StaticVariables;
 
@@ -10,6 +11,8 @@ public class Player extends ObjectsGame{
 	private double velX = StaticVariables.minSpeed;
 	private double velY = StaticVariables.gravity;
 	private int timer = 0;
+	private LinkedList<ObjectsGame> objects;
+	private World world;
 	
 	private boolean jumping = false;
 	
@@ -34,6 +37,12 @@ public class Player extends ObjectsGame{
 		x += velX;
 		y += velY;
 		
+		objects = new LinkedList<ObjectsGame>();
+		world = new World();
+		objects = world.getObjects();
+		for(int i = 0 ; i < objects.size() ; i++) {
+			collision(objects.get(i));
+		}
 		
 	
 	}

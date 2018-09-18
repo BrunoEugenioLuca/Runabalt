@@ -6,8 +6,8 @@ public interface StaticVariables {
 	
 	// @author SuperNinja variabili statiche per il mondo logico
 	
-	public static int WORLD_WIDTH = 50;
-	public static int WORLD_HEIGHT = 2000;
+	public static int WORLD_WIDTH = 5;
+	public static int WORLD_HEIGHT = 10;
 
 	// varialbli statiche per la classe Player
 
