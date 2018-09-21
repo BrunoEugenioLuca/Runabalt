@@ -3,7 +3,7 @@ package core;
 import java.awt.Rectangle;
 
 
-abstract class ObjectsGame{
+public abstract class ObjectsGame{
 	
 	protected double x,y;
 	

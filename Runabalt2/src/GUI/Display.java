@@ -3,10 +3,9 @@ package GUI;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-
+import core.World;
 import core.GameUpdater;
 import core.Player;
 import utils.StaticVariables;
@@ -18,11 +17,12 @@ public class Display extends JPanel {
 	private Player player;
 
 	private Drawer drawer;
-
+	private World world;
 	private GameUpdater gameUpdater;
 
-	public Display() {
-		player = new Player(100, 100);
+	public Display(World world) {
+		this.world = world;
+		player = new Player(100, 100, world);
 
 		drawer = new Drawer(player);
 

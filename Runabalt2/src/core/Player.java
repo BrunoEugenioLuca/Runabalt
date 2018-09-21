@@ -1,26 +1,25 @@
 package core;
 
 import java.awt.Rectangle;
-import java.util.LinkedList;
 
 import utils.StaticVariables;
 
 
 public class Player extends ObjectsGame{
 	
-	private double velX = StaticVariables.minSpeed;
-	private double velY = StaticVariables.gravity;
-	private int timer = 0;
-	private LinkedList<ObjectsGame> objects;
+	private double velX;
+	private double velY;
+	private int timer;
 	private World world;
-	
-	private boolean jumping = false;
-	
-	
-	
-	
-	public Player(double x, double y) {
+	private boolean jumping;
+
+	public Player(double x, double y, World world) {
 		super(x, y);
+		velX = StaticVariables.minSpeed;
+		velY = StaticVariables.gravity;
+		timer = 0;
+		jumping = false;
+		this.world = world;
 	}
 	
 	// @author SuperNinja update del Player
@@ -36,12 +35,10 @@ public class Player extends ObjectsGame{
 		}
 		x += velX;
 		y += velY;
-		
-		objects = new LinkedList<ObjectsGame>();
-		world = new World();
-		objects = world.getObjects();
-		for(int i = 0 ; i < objects.size() ; i++) {
-			collision(objects.get(i));
+			
+		System.out.println(world.getObjectsGame().size());
+		for(int i = 0 ; i < world.getObjectsGame().size() ; i++) {
+			collision(world.getObjectsGame().get(i));		
 		}
 		
 	
@@ -70,8 +67,10 @@ public class Player extends ObjectsGame{
 	}
 	
 	public void jump() {
+		jumping = true;
 		velY = -10;
 	}
+	
 
 	// funzione che crea un rettangolo intorno al Player 
 	@Override

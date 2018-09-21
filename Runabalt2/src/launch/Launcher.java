@@ -2,14 +2,21 @@ package launch;
 
 import GUI.Window;
 import core.World;
-import utils.StaticVariables;
+import editor.LoadLevel;
+import editor.SaveLevel;
 
 public class Launcher {
 	
 	public static void main(String args[]) {
-		new Window();
 		World w = new World();
-		w.printWorld();
+		new Window(w);
+		String file_path = "levels/lll.txt";
+		LoadLevel level = new LoadLevel(file_path, w);
+		
+		SaveLevel file = new SaveLevel(w);
+		//w.printWorld();
+		//w.getObjects();s
+		
 	}
 
 }
