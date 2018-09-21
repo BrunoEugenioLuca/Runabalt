@@ -1,6 +1,7 @@
 package core;
 
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 
 import utils.StaticVariables;
 
@@ -36,7 +37,6 @@ public class Player extends ObjectsGame{
 		x += velX;
 		y += velY;
 			
-		System.out.println(world.getObjectsGame().size());
 		for(int i = 0 ; i < world.getObjectsGame().size() ; i++) {
 			collision(world.getObjectsGame().get(i));		
 		}
@@ -67,8 +67,10 @@ public class Player extends ObjectsGame{
 	}
 	
 	public void jump() {
-		jumping = true;
-		velY = -10;
+		if(!jumping)
+			velY = -10;
+		else
+			velY += StaticVariables.gravity;
 	}
 	
 
@@ -94,5 +96,20 @@ public class Player extends ObjectsGame{
 		this.velY = veloY;
 	}
 
+	public void keyPressed(KeyEvent e) {
+		int key = e.getKeyCode();
+		if(key == KeyEvent.VK_SPACE) {
+			jumping = true;
+			jump();
+		}
+	}
+
+	public void keyReleased(KeyEvent e) {
+		int key = e.getKeyCode();
+		if(key == KeyEvent.VK_SPACE) {
+			jumping = false;
+			jump();
+		}
+	}
 
 }

@@ -13,7 +13,7 @@ public class Launcher {
 		String file_path = "levels/lll.txt";
 		LoadLevel level = new LoadLevel(file_path, w);
 		
-		SaveLevel file = new SaveLevel(w);
+		//SaveLevel file = new SaveLevel(w);
 		//w.printWorld();
 		//w.getObjects();s
 		
