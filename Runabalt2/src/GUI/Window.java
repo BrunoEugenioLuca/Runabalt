@@ -10,11 +10,9 @@ public class Window extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private Component currentComponent;
-	private World world;
 
-	public Window(World world) {
-		this.world = world;
-		currentComponent = new Display(world);
+	public Window() {
+		currentComponent = new Display();
 
 		initFrame();
 	}

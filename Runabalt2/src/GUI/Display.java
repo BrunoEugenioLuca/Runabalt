@@ -20,8 +20,11 @@ public class Display extends JPanel {
 	private World world;
 	private GameUpdater gameUpdater;
 
-	public Display(World world) {
-		this.world = world;
+	public Display() {
+		this.world = new World();
+		
+		world.printWorld();
+		
 		player = new Player(100, 100, world);
 
 		drawer = new Drawer(player);
@@ -35,6 +38,8 @@ public class Display extends JPanel {
 
 	public void initDisplay() {
 		this.setPreferredSize(new Dimension(StaticVariables.SCREEN_WIDTH, StaticVariables.SCREEN_HEIGHT));
+		
+		this.setFocusable(true);
 
 	}
 

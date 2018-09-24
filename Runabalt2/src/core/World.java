@@ -10,7 +10,7 @@ public class World {
 	private LinkedList<ObjectsGame> objectsGame;
 
 	public World() {
-		matrix = new char[StaticVariables.WORLD_WIDTH][StaticVariables.WORLD_HEIGHT];
+		matrix = new char[StaticVariables.WORLD_HEIGHT][StaticVariables.WORLD_WIDTH];
 		objectsGame = new LinkedList<ObjectsGame>();
 		emptyWorld();
 	}

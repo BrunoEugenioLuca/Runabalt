@@ -8,10 +8,9 @@ import editor.SaveLevel;
 public class Launcher {
 	
 	public static void main(String args[]) {
-		World w = new World();
-		new Window(w);
-		String file_path = "levels/lll.txt";
-		LoadLevel level = new LoadLevel(file_path, w);
+		new Window();
+//		String file_path = "levels/lll.txt";
+//		LoadLevel level = new LoadLevel(file_path, w);
 		
 		//SaveLevel file = new SaveLevel(w);
 		//w.printWorld();
