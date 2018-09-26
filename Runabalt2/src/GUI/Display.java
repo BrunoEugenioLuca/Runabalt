@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import core.World;
 import core.GameUpdater;
 import core.Player;
+import utils.KeyInput;
 import utils.StaticVariables;
 
 public class Display extends JPanel {
@@ -25,7 +26,7 @@ public class Display extends JPanel {
 		
 		world.printWorld();
 		
-		player = new Player(100, 100, world);
+		player = new Player(100, 300, world);
 
 		drawer = new Drawer(player);
 
@@ -38,7 +39,7 @@ public class Display extends JPanel {
 
 	public void initDisplay() {
 		this.setPreferredSize(new Dimension(StaticVariables.SCREEN_WIDTH, StaticVariables.SCREEN_HEIGHT));
-		
+		addKeyListener(new KeyInput(player));
 		this.setFocusable(true);
 
 	}

@@ -17,9 +17,9 @@ public class Player extends ObjectsGame{
 	public Player(double x, double y, World world) {
 		super(x, y);
 		velX = StaticVariables.minSpeed;
-		velY = StaticVariables.gravity;
+		velY = 0;
+		jumping = true;
 		timer = 0;
-		jumping = false;
 		this.world = world;
 	}
 	
@@ -34,12 +34,13 @@ public class Player extends ObjectsGame{
 				velX = StaticVariables.maxSpeed;
 			timer = 0;
 		}
-		x += velX;
+		//x += velX;
 		y += velY;
 			
 		for(int i = 0 ; i < world.getObjectsGame().size() ; i++) {
 			collision(world.getObjectsGame().get(i));		
 		}
+		
 		
 	
 	}
@@ -64,13 +65,6 @@ public class Player extends ObjectsGame{
 			}
 		
 		}
-	}
-	
-	public void jump() {
-		if(!jumping)
-			velY = -10;
-		else
-			velY += StaticVariables.gravity;
 	}
 	
 
@@ -99,16 +93,21 @@ public class Player extends ObjectsGame{
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		if(key == KeyEvent.VK_SPACE) {
-			jumping = true;
-			jump();
-		}
+			if(y >= StaticVariables.maxHeight && jumping)
+			velY = StaticVariables.maxJump;
+			if(y <= StaticVariables.maxHeight) {
+			velY = - StaticVariables.maxJump;
+				jumping = false;
+			}
+		}	  
 	}
 
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 		if(key == KeyEvent.VK_SPACE) {
-			jumping = false;
-			jump();
+			velY = - StaticVariables.maxJump;
+			jumping = true;
+			
 		}
 	}
 
