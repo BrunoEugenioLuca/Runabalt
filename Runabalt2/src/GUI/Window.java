@@ -1,7 +1,6 @@
 package GUI;
 
 import java.awt.Component;
-import core.World;
 
 import javax.swing.JFrame;
 

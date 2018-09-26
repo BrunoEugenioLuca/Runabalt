@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -39,7 +40,9 @@ public class Display extends JPanel {
 
 	public void initDisplay() {
 		this.setPreferredSize(new Dimension(StaticVariables.SCREEN_WIDTH, StaticVariables.SCREEN_HEIGHT));
+		
 		addKeyListener(new KeyInput(player));
+		
 		this.setFocusable(true);
 
 	}
@@ -57,10 +60,12 @@ public class Display extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
+		Graphics2D g2D = (Graphics2D) g;
 
-		g.drawImage(getBackgroundImage(), 0, 0, StaticVariables.SCREEN_WIDTH, StaticVariables.SCREEN_HEIGHT, null);
+		g2D.drawImage(getBackgroundImage(), 0, 0, StaticVariables.SCREEN_WIDTH, StaticVariables.SCREEN_HEIGHT, null);
 
-		drawer.drawPlayer(g);
+		drawer.drawPlayer(g2D);
 	}
 
 }
