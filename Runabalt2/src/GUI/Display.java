@@ -7,7 +7,9 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import core.World;
+import core.Block;
 import core.GameUpdater;
+import core.Handler;
 import core.Player;
 import utils.KeyInput;
 import utils.StaticVariables;
@@ -18,33 +20,57 @@ public class Display extends JPanel {
 
 	private Player player;
 
+	private Handler handler;
+
 	private Drawer drawer;
 	private World world;
 	private GameUpdater gameUpdater;
 
 	public Display() {
-		this.world = new World();
-		
-		world.printWorld();
-		
-		player = new Player(100, 300, world);
-
-		drawer = new Drawer(player);
-
-		gameUpdater = new GameUpdater(player, this);
 
 		initDisplay();
+		
+		initObjectsGame();
+		
+		initListeners();
 
 		gameUpdater.start();
 	}
 
-	public void initDisplay() {
+	private void initDisplay() {
 		this.setPreferredSize(new Dimension(StaticVariables.SCREEN_WIDTH, StaticVariables.SCREEN_HEIGHT));
-		
-		addKeyListener(new KeyInput(player));
-		
+		this.setMaximumSize(new Dimension(StaticVariables.SCREEN_WIDTH, StaticVariables.SCREEN_HEIGHT));
+		this.setMinimumSize(new Dimension(StaticVariables.SCREEN_WIDTH, StaticVariables.SCREEN_HEIGHT));
+
 		this.setFocusable(true);
 
+	}
+
+	private void initObjectsGame() {
+		world = new World();
+
+		player = new Player(100, 300, world);
+
+		handler = new Handler();
+		
+		initHandler();
+
+		drawer = new Drawer(player, handler);
+
+		gameUpdater = new GameUpdater(player, this);
+	}
+	
+	private void initListeners() {
+		addKeyListener(new KeyInput(player));
+	}
+	
+	private void initHandler() {
+		for(int i = 0; i < StaticVariables.SCREEN_WIDTH / 2; i += 32) {
+			handler.addObject(new Block(i, 500));
+			for(int j = 532 ; j < StaticVariables.SCREEN_HEIGHT - 32; j += 32)
+				handler.addObject(new Block(i, j));
+		}
+			
 	}
 
 	private Image getBackgroundImage() {
@@ -60,12 +86,15 @@ public class Display extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
+
+		g.drawImage(getBackgroundImage(), 0, 0, StaticVariables.SCREEN_WIDTH, StaticVariables.SCREEN_HEIGHT, this);
+
 		Graphics2D g2D = (Graphics2D) g;
 
-		g2D.drawImage(getBackgroundImage(), 0, 0, StaticVariables.SCREEN_WIDTH, StaticVariables.SCREEN_HEIGHT, null);
-
 		drawer.drawPlayer(g2D);
+		
+		drawer.drawHandler(g2D);
+
 	}
 
 }
