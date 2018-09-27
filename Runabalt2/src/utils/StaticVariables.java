@@ -16,9 +16,10 @@ public interface StaticVariables {
 	public static double minSpeed = 0.5;
 	public static double stop = 1.5;
 	public static int updateSpeed = 2;
-	public static double gravity = 5.0;
-	public static double maxJump = -5.0;
-	public static double maxHeight = 90.0;
+	public static double gravity = 10.0;
+	public static double speedJump = -10.0;
+	public static double maxJump = 200.0;
+
 	
 	// @author SuperNinja caratteri per identificare gli oggetti
 	

@@ -13,12 +13,14 @@ public class Player extends ObjectsGame{
 	private int timer;
 	private World world;
 	private boolean jumping;
+	private double current;
 
 	public Player(double x, double y, World world) {
 		super(x, y);
 		velX = StaticVariables.minSpeed;
 		velY = 0;
-		jumping = true;
+		jumping = false;
+		current = 0;
 		timer = 0;
 		this.world = world;
 	}
@@ -34,17 +36,27 @@ public class Player extends ObjectsGame{
 				velX = StaticVariables.maxSpeed;
 			timer = 0;
 		}
-		//x += velX;
-		y += velY;
-			
+		x += velX;
+	
+		jump();
 		for(int i = 0 ; i < world.getObjectsGame().size() ; i++) {
 			collision(world.getObjectsGame().get(i));		
 		}
-		
-		
+				
 	
 	}
 
+	public void jump() {
+		y += velY;
+		
+		if(y <= current && current != 0) {
+			
+			velY = StaticVariables.gravity;
+			current = 0;
+		}	
+		x += velX;
+	}
+		
 	// funzione che verifica con quali ostacoli collide il Player
 	
 	public void collision(ObjectsGame o) {
@@ -74,6 +86,7 @@ public class Player extends ObjectsGame{
 		return new Rectangle((int)this.getX(),(int)this.getY(), 32, 32);
 	}
 
+	
 	public double getVelX() {
 		return velX;
 	}
@@ -91,22 +104,16 @@ public class Player extends ObjectsGame{
 	}
 
 	public void keyPressed(KeyEvent e) {
-		int key = e.getKeyCode();
-		if(key == KeyEvent.VK_SPACE) {
-			if(y >= StaticVariables.maxHeight && jumping)
-			velY = StaticVariables.maxJump;
-			if(y <= StaticVariables.maxHeight) {
-			velY = - StaticVariables.maxJump;
-				jumping = false;
-			}
-		}	  
+				
+		
 	}
 
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 		if(key == KeyEvent.VK_SPACE) {
-			velY = - StaticVariables.maxJump;
-			jumping = true;
+			current = y-StaticVariables.maxJump;
+			System.out.println("current: "+ current);
+			velY = StaticVariables.speedJump;
 			
 		}
 	}
