@@ -47,6 +47,7 @@ public class GameUpdater extends Thread{
 				updates = 0;
 				frames = 0;
 			}
+			
 		}
 	}
 

@@ -16,10 +16,12 @@ public interface StaticVariables {
 	public static double minSpeed = 0.5;
 	public static double stop = 1.5;
 	public static int updateSpeed = 2;
-	public static double gravity = 10.0;
-	public static double speedJump = -10.0;
-	public static double maxJump = 200.0;
-
+	public static double maxFallSpeed = 5;
+	
+	// @author SuperNinja path statico per salvare il livello
+	
+	public static String path = "C:\\Users\\Luca\\git\\Runabalt\\Runabalt2\\levels";
+	
 	
 	// @author SuperNinja caratteri per identificare gli oggetti
 	

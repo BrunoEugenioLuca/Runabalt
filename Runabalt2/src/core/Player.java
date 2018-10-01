@@ -2,7 +2,6 @@ package core;
 
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
-
 import utils.StaticVariables;
 
 
@@ -12,16 +11,28 @@ public class Player extends ObjectsGame{
 	private double velY;
 	private int timer;
 	private World world;
+	
+	private boolean falling;
 	private boolean jumping;
-	private double current;
-
+	
+	//jump speed; 
+	private double jumpSpeed;
+	private double currentJumpSpeed;
+	
+	// fall speed
+	private double currentFallSpeed;
+	
 	public Player(double x, double y, World world) {
 		super(x, y);
 		velX = StaticVariables.minSpeed;
-		velY = 0;
-		jumping = false;
-		current = 0;
+		velY = 1.0;
 		timer = 0;
+		jumpSpeed = 5;
+		currentJumpSpeed = jumpSpeed;
+		currentFallSpeed = 0.1;
+		falling = false;
+		jumping = false;
+		
 		this.world = world;
 	}
 	
@@ -37,8 +48,9 @@ public class Player extends ObjectsGame{
 			timer = 0;
 		}
 		x += velX;
-	
+		y += velY;
 		jump();
+		
 		for(int i = 0 ; i < world.getObjectsGame().size() ; i++) {
 			collision(world.getObjectsGame().get(i));		
 		}
@@ -47,14 +59,23 @@ public class Player extends ObjectsGame{
 	}
 
 	public void jump() {
-		y += velY;
+		if(jumping && !falling) {
+			y -= currentJumpSpeed;
+			currentJumpSpeed -= 0.1;
+			if(currentJumpSpeed <= 0) {
+				currentJumpSpeed = jumpSpeed;
+				jumping = false;
+				falling = true;
+			}
+		}
 		
-		if(y <= current && current != 0) {
-			
-			velY = StaticVariables.gravity;
-			current = 0;
-		}	
-		x += velX;
+		if(falling) {
+			y += currentFallSpeed;
+			if(currentFallSpeed < StaticVariables.maxFallSpeed)
+				currentFallSpeed += 0.1;
+			if(!falling)
+				currentFallSpeed = 0.1;		
+		}
 	}
 		
 	// funzione che verifica con quali ostacoli collide il Player
@@ -104,18 +125,15 @@ public class Player extends ObjectsGame{
 	}
 
 	public void keyPressed(KeyEvent e) {
-				
+		int key = e.getKeyCode();
+		if(key == KeyEvent.VK_SPACE)
+			jumping = true;
 		
 	}
 
-	public void keyReleased(KeyEvent e) {
-		int key = e.getKeyCode();
-		if(key == KeyEvent.VK_SPACE) {
-			current = y-StaticVariables.maxJump;
-			System.out.println("current: "+ current);
-			velY = StaticVariables.speedJump;
-			
+	public void keyReleased(KeyEvent e) {		
+			falling = true;
 		}
 	}
 
-}
+
