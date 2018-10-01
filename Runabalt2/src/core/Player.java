@@ -25,11 +25,11 @@ public class Player extends ObjectsGame{
 	public Player(double x, double y, World world) {
 		super(x, y);
 		velX = StaticVariables.minSpeed;
-		velY = 1.0;
+		velY = 0;
 		timer = 0;
-		jumpSpeed = 5;
+		jumpSpeed = 10;
 		currentJumpSpeed = jumpSpeed;
-		currentFallSpeed = 0.1;
+		currentFallSpeed = 0.3;
 		falling = false;
 		jumping = false;
 		
@@ -48,7 +48,7 @@ public class Player extends ObjectsGame{
 			timer = 0;
 		}
 		x += velX;
-		y += velY;
+		//y += velY;
 		jump();
 		
 		for(int i = 0 ; i < world.getObjectsGame().size() ; i++) {
@@ -61,7 +61,7 @@ public class Player extends ObjectsGame{
 	public void jump() {
 		if(jumping && !falling) {
 			y -= currentJumpSpeed;
-			currentJumpSpeed -= 0.1;
+			currentJumpSpeed -= 0.3;
 			if(currentJumpSpeed <= 0) {
 				currentJumpSpeed = jumpSpeed;
 				jumping = false;
@@ -72,9 +72,9 @@ public class Player extends ObjectsGame{
 		if(falling) {
 			y += currentFallSpeed;
 			if(currentFallSpeed < StaticVariables.maxFallSpeed)
-				currentFallSpeed += 0.1;
+				currentFallSpeed += 0.3;
 			if(!falling)
-				currentFallSpeed = 0.1;		
+				currentFallSpeed = 0.3;		
 		}
 	}
 		

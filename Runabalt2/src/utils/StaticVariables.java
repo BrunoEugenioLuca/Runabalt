@@ -16,7 +16,7 @@ public interface StaticVariables {
 	public static double minSpeed = 0.5;
 	public static double stop = 1.5;
 	public static int updateSpeed = 2;
-	public static double maxFallSpeed = 5;
+	public static double maxFallSpeed = 10;
 	
 	// @author SuperNinja path statico per salvare il livello
 	
