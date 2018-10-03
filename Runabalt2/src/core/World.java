@@ -51,6 +51,13 @@ public class World {
 		else if (o instanceof Archive)
 			matrix[(int) o.getX()][(int) o.getY()] = StaticVariables.archive;
 	}
+	
+/**
+ * add to list
+ * @param i position 
+ * @param list listObjectsGame
+ * return void
+ */
 
 	public void addToList(int i, char[] list) {
 		for (int j = 0; j < list.length; j++) {
@@ -78,6 +85,10 @@ public class World {
 		matrix[(int) o.getX()][(int) o.getY()] = StaticVariables.empty;
 	}
 
+	/**
+	 * 
+	 * @return {@link LinkedList}
+	 */
 	public LinkedList<ObjectsGame> getObjectsGame() {
 		return objectsGame;
 	}

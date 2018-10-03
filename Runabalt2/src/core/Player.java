@@ -4,7 +4,11 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import utils.StaticVariables;
 
-
+/**
+ * 
+ * @author Luca
+ *
+ */
 public class Player extends ObjectsGame{
 	
 	private double velX;
@@ -21,7 +25,13 @@ public class Player extends ObjectsGame{
 	
 	// fall speed
 	private double currentFallSpeed;
-	
+
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @param world
+	 */
 	public Player(double x, double y, World world) {
 		super(x, y);
 		velX = StaticVariables.minSpeed;
